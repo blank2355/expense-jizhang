@@ -1,0 +1,22 @@
+{
+  "name": "记一笔",
+  "short_name": "记一笔",
+  "description": "出差与日常快速记账，AI 智能识别支付截图",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1D1D1F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
