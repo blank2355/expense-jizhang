@@ -69,11 +69,11 @@
     "uuid": "^14.0.0",
     "vaul": "^1.1.2",
     "zod": "^4.3.5",
-    "@react-dev-inspector/babel-plugin": "^2.0.1"
+    "@react-dev-inspector/babel-plugin": "^2.0.1",
+    "@tailwindcss/postcss": "^4"
   },
   "devDependencies": {
     "@react-dev-inspector/middleware": "^2.0.1",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.16.0",
     "@types/react": "^19",
@@ -94,4 +94,3 @@
     "pnpm": ">=9.0.0"
   }
 }
-
