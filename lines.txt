@@ -1,0 +1,10 @@
+    if (result.time) setRecordTime(result.time);
+
+    if (result.note) setNote(result.note);
+
+    toast.success('AI å·²è¯å«ä»æ¬¾ä¿¡æ?);
+
+  };
+
+
+
