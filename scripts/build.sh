@@ -1,7 +1,7 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -Eeuo pipefail
 
-cd ""
+cd "${COZE_WORKSPACE_PATH:-$(pwd)}"
 
 echo "Installing dependencies..."
 pnpm install --prefer-frozen-lockfile --prefer-offline --loglevel warn
