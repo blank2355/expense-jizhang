@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '服务配置不完整' }, { status: 500 });
     }
 
-    const userResponse = await fetch(\/auth/v1/user\, {
-      headers: { 'apikey': anonKey, 'Authorization': \Bearer \ },
+    const userResponse = await fetch('/auth/v1/user', {
+      headers: { 'apikey': anonKey, 'Authorization': 'Bearer ' + accessToken},
     });
 
     if (!userResponse.ok) {
@@ -44,11 +44,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '无管理员权限' }, { status: 403 });
     }
 
-    const updateResponse = await fetch(\/auth/v1/admin/users/\, {
+    const updateResponse = await fetch('/auth/v1/admin/users/', {
       method: 'PUT',
       headers: {
         'apikey': serviceRoleKey,
-        'Authorization': \Bearer \,
+        'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user_metadata: { approved, is_admin: false } }),

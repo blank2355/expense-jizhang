@@ -27,8 +27,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: '未授权' }, { status: 401 });
     }
 
-    const sessionRes = await fetch(\/auth/v1/user\, {
-      headers: { 'apikey': anonKey, 'Authorization': \Bearer \ },
+    const sessionRes = await fetch('/auth/v1/user', {
+      headers: { 'apikey': anonKey, 'Authorization': 'Bearer ' + accessToken},
     });
     const sessionData = await sessionRes.json();
     const isAdmin = sessionData?.user_metadata?.is_admin === true;
@@ -36,8 +36,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: '无管理员权限' }, { status: 403 });
     }
 
-    const usersRes = await fetch(\/auth/v1/admin/users\, {
-      headers: { 'apikey': serviceRoleKey, 'Authorization': \Bearer \ },
+    const usersRes = await fetch('/auth/v1/admin/users', {
+      headers: { 'apikey': serviceRoleKey, 'Authorization': 'Bearer ' + accessToken},
     });
     const usersData = await usersRes.json();
 

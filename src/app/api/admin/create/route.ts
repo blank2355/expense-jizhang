@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = createClient(config.url, config.serviceRoleKey);
-    const email = \@expense.app\;
+    const email = 'admin@expense.app';
 
     const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
 
