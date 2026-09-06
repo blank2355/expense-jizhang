@@ -71,13 +71,14 @@
     "zod": "^4.3.5",
     "@react-dev-inspector/babel-plugin": "^2.0.1",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "@types/react": "^19",
+    "@types/node": "^20"
   },
   "devDependencies": {
     "@react-dev-inspector/middleware": "^2.0.1",
-    "@types/node": "^20",
     "@types/pg": "^8.16.0",
-    "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/uuid": "^11.0.0",
     "eslint": "^9",
@@ -86,8 +87,7 @@
     "react-dev-inspector": "^2.0.1",
     "shadcn": "latest",
     "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5"
+    "tsx": "^4.19.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
