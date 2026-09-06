@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     }
 
     const sessionRes = await fetch('/auth/v1/user', {
-      headers: { 'apikey': anonKey, 'Authorization': 'Bearer ' + accessToken},
+      headers: { 'apikey': anonKey, 'Authorization': 'Bearer ' + authHeader},
     });
     const sessionData = await sessionRes.json();
     const isAdmin = sessionData?.user_metadata?.is_admin === true;
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
     }
 
     const usersRes = await fetch('/auth/v1/admin/users', {
-      headers: { 'apikey': serviceRoleKey, 'Authorization': 'Bearer ' + accessToken},
+      headers: { 'apikey': serviceRoleKey, 'Authorization': 'Bearer ' + authHeader},
     });
     const usersData = await usersRes.json();
 
