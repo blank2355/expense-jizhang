@@ -244,7 +244,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
       });
-      const data = await response.json();
+      let data; try{data=await response.json();}catch(e){data={error:'JSON parse error'};} console.log('[OCR] status:',response.status,'data:',JSON.stringify(data).substring(0,200),'ocr:',ocrText?.substring(0,50));
       if (data.result) {
         applyAIResult(data.result);
       } else {

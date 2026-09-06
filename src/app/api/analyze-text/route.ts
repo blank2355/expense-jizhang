@@ -20,7 +20,7 @@ const SYSTEM_PROMPT = `你是支付信息分析助手。用户会给你一段从
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const text = body.text as string;
+    const text = body?.text as string | undefined; console.log("[analyze-text] text:", text?.substring(0, 50));
 
     if (!text || text.trim().length === 0) {
       return NextResponse.json({ error: "请提供文本内容" }, { status: 400 });
