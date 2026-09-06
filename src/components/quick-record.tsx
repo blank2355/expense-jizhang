@@ -171,16 +171,16 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
     if (result.date) setRecordDate(result.date);
     if (result.time) setRecordTime(result.time);
     if (result.note) setNote(result.note);
-    toast.success('AI 已识别付款信息');
+    toast.success('AI 已识别付款信�?);
   };
 
   const handleSave = async () => {
     if (!amount || parseFloat(amount) <= 0) {
-      toast.error('请输入金额');
+      toast.error('请输入金�?);
       return;
     }
     if (!supabase) {
-      toast.error('系统未就绪');
+      toast.error('系统未就�?);
       return;
     }
 
@@ -248,7 +248,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
       if (data.result) {
         applyAIResult(data.result);
       } else {
-        toast.error(data.error || '文本识别失败，请手动输入');
+        console.error('[OCR] API response:', data); toast.error(data.error || 'AI ʶ��ʧ�ܣ����ֶ�����'); console.log('[OCR] ocrText:', ocrText);
       }
     } catch {
       toast.error('网络错误，请重试');
@@ -286,7 +286,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
       <div className="flex-1 overflow-y-auto px-5 pt-10 pb-28">
         {/* Header */}
         <div className="mb-3 flex items-center justify-between">
-          <h1 className="text-[28px] font-semibold tracking-tight text-[#1D1D1F]">记一笔</h1>
+          <h1 className="text-[28px] font-semibold tracking-tight text-[#1D1D1F]">记一�?/h1>
           <div className="flex gap-2">
             <button
               onClick={handleAlbumSelect}
@@ -314,7 +314,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
           <div className="mb-3 flex items-center justify-between rounded-xl bg-[#F0FFF4] p-2.5">
             <div className="flex items-center gap-2">
               <Check className="h-4 w-4 text-[#34C759]" />
-              <span className="text-sm text-[#34C759]">AI 已识别，请确认</span>
+              <span className="text-sm text-[#34C759]">AI 已识别，请确�?/span>
             </div>
             <button onClick={() => setAiResult(null)} className="text-[#86868B]">
               <X className="h-4 w-4" />
@@ -535,7 +535,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
           disabled={saving || !amount}
           className="h-12 w-full rounded-2xl bg-[#1D1D1F] text-base font-semibold text-white shadow-sm hover:bg-black active:scale-[0.98] transition-all disabled:opacity-40"
         >
-          {saving ? '保存中...' : '确认记账'}
+          {saving ? '保存�?..' : '确认记账'}
         </Button>
       </div>
     </div>
@@ -544,7 +544,7 @@ function QuickRecordInner({ quickMode, onQuickModeConsumed, ocrText }: { quickMo
 
 export function QuickRecord({ quickMode, onQuickModeConsumed, ocrText }: { quickMode?: boolean; onQuickModeConsumed?: () => void; ocrText?: string | null }) {
   return (
-    <Suspense fallback={<div className="flex min-h-[50vh] items-center justify-center"><div className="text-sm text-[#86868B]">加载中...</div></div>}>
+    <Suspense fallback={<div className="flex min-h-[50vh] items-center justify-center"><div className="text-sm text-[#86868B]">加载�?..</div></div>}>
       <QuickRecordInner quickMode={quickMode} onQuickModeConsumed={onQuickModeConsumed} ocrText={ocrText ?? undefined} />
     </Suspense>
   );
