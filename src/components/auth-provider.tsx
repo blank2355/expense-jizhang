@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Read approval status from user_metadata (no profiles table dependency)
   const updateApprovalFromUser = useCallback((u: User | null) => {
     if (u) {
-      const meta = u.user_metadata || {};
+      const meta = u.user_metadata || u.raw_user_meta_data || {};
       const isApproved = meta.approved === true;
       const isAdminUser = meta.is_admin === true;
       console.log('[AuthProvider] User metadata:', { approved: isApproved, isAdmin: isAdminUser, meta });

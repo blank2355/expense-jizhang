@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     const userData = await userResponse.json();
-    const isAdmin = userData.user_metadata?.is_admin === true;
+    const isAdmin = userData.user_metadata?.is_admin === true || userData.raw_user_meta_data?.is_admin === true;
     if (!isAdmin) {
       return NextResponse.json({ error: '无管理员权限' }, { status: 403 });
     }
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user_metadata: { approved, is_admin: false } }),
+      body: JSON.stringify({ user_metadata: { approved, is_admin: false }, raw_user_meta_data: { approved, is_admin: false } }),
     });
 
     if (!updateResponse.ok) {

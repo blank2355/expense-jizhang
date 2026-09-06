@@ -47,7 +47,7 @@ export async function GET(request: Request) {
 
     const pendingUsers = usersData.users
       .filter((u: Record<string, unknown>) => {
-        const meta = (u.user_metadata as Record<string, unknown>) || {};
+        const meta = (u.user_metadata as Record<string, unknown>) || (u.raw_user_meta_data as Record<string, unknown>) || {};
         return meta.approved !== true && meta.is_admin !== true;
       })
       .map((u: Record<string, unknown>) => ({
