@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 百度 OCR API 集成
  * 优先使用百度 OCR，免费额度用完后自动切换 DeepSeek
  */
@@ -34,7 +34,7 @@ async function getBaiduAccessToken(): Promise<string | null> {
 
   try {
     const response = await fetch(
-      `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${apiKey}&client_secret=${secretKey}`
+      \https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=\&client_secret=\
     );
     const data = await response.json();
 
@@ -61,14 +61,14 @@ export async function recognizeWithBaidu(imageBase64: string): Promise<AnalyzeRe
   }
 
   try {
-    const url = `https://aip.baidubce.com/rest/2.0/ocr/v1/accurateBasic?access_token=${accessToken}`;
+    const url = \https://aip.baidubce.com/rest/2.0/ocr/v1/accurateBasic?access_token=\;
 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `image=${encodeURIComponent(imageBase64)}`,
+      body: \image=\,
     });
 
     const data = await response.json();
