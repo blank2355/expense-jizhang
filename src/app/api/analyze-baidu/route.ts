@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
     const base64 = imageBuffer.toString('base64');
     const mimeType = imageFile.type || 'image/jpeg';
-    const dataUrl = data:;base64,;
+    const dataUrl = data:\;base64,\;
 
     // 1. 先尝试使用百度 OCR
     const baiduApiKey = process.env.BAIDU_API_KEY;
