@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/components/auth-provider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, MapPin, Calendar, ChevronRight, Trash2 } from 'lucide-react';
+import { Plus, MapPin, Calendar, ChevronRight, Trash2, Edit2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { getCategoryLabel, getCurrencySymbol } from '@/lib/constants';
 
@@ -39,6 +39,9 @@ export function TripPage() {
   const [newStartDate, setNewStartDate] = useState('');
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [tripRecords, setTripRecords] = useState<TripRecord[]>([]);
+  const [editingTrip, setEditingTrip] = useState<string | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editDestination, setEditDestination] = useState('');
 
   // Initialize date on client only
   useEffect(() => {
@@ -131,6 +134,41 @@ export function TripPage() {
       if (selectedTrip?.id === tripId) {
         setSelectedTrip(null);
       }
+    }
+  };
+
+  const startEditTrip = (trip: Trip) => {
+    setEditingTrip(trip.id);
+    setEditName(trip.name);
+    setEditDestination(trip.destination || '');
+  };
+
+  const cancelEditTrip = () => {
+    setEditingTrip(null);
+    setEditName('');
+    setEditDestination('');
+  };
+
+  const saveTripEdit = async (tripId: string) => {
+    if (!supabase || !editName.trim()) {
+      toast.error(editName.trim() ? '' : '名称不能为空');
+      if (!editName.trim()) toast.error('名称不能为空');
+      return;
+    }
+    const { error } = await supabase
+      .from('trips')
+      .update({ name: editName.trim(), destination: editDestination.trim() || null })
+      .eq('id', tripId);
+    if (!error) {
+      toast.success('已保存');
+      setEditingTrip(null);
+      fetchTrips();
+      if (selectedTrip?.id === tripId) {
+        setSelectedTrip(null);
+        setTimeout(() => fetchTripRecords(tripId), 100);
+      }
+    } else {
+      toast.error('保存失败');
     }
   };
 
