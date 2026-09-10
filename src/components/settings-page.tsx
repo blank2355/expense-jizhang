@@ -224,7 +224,7 @@ export function SettingsPage() {
       <div className="mb-5 rounded-2xl bg-white shadow-sm">
         <div className="flex items-center justify-between p-4">
           <span className="text-sm text-[#1D1D1F]">版本</span>
-          <span className="text-sm text-[#86868B]">1.5.0</span>
+          <span className="text-sm text-[#86868B]">1.8.1</span>
         </div>
       </div>
 
