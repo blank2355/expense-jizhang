@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "projects",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "private": true,
   "scripts": {
     "build": "bash ./scripts/build.sh",
@@ -94,3 +94,4 @@
     "pnpm": ">=9.0.0"
   }
 }
+

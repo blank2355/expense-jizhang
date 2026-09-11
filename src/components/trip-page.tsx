@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/components/auth-provider';
@@ -218,17 +218,42 @@ export function TripPage() {
           <ChevronRight className="h-4 w-4 rotate-180" />
           返回出差列表
         </button>
-
-        <h1 className="mb-2 text-[24px] font-semibold tracking-tight text-[#1D1D1F]">
-          {selectedTrip.name}
-        </h1>
-        {selectedTrip.destination && (
+        <div className="mb-2 flex items-center justify-between">
+          {isEditingTrip ? (
+            <Input
+              value={editTripName}
+              onChange={(e) => setEditTripName(e.target.value)}
+              className="h-9 text-[20px] font-semibold"
+              autoFocus
+            />
+          ) : (
+            <h1 className="text-[24px] font-semibold tracking-tight text-[#1D1D1F]">
+              {selectedTrip.name}
+            </h1>
+          )}
+          <button
+            onClick={isEditingTrip ? cancelEditTripDetail : startEditTripDetail}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5F5F7] text-[#86868B] transition-all active:scale-95"
+          >
+            <Edit2 className="h-4 w-4" />
+          </button>
+        </div>
+        {isEditingTrip ? (
+          <div className="mb-1 flex items-center gap-1">
+            <MapPin className="h-3.5 w-3.5 text-[#86868B]" />
+            <Input
+              value={editTripDestination}
+              onChange={(e) => setEditTripDestination(e.target.value)}
+              placeholder="目的地"
+              className="h-8 text-sm"
+            />
+          </div>
+        ) : selectedTrip.destination && (
           <div className="mb-1 flex items-center gap-1 text-sm text-[#86868B]">
             <MapPin className="h-3.5 w-3.5" />
             {selectedTrip.destination}
           </div>
         )}
-        <div className="mb-5 flex items-center gap-1 text-sm text-[#86868B]">
           <Calendar className="h-3.5 w-3.5" />
           {selectedTrip.start_date}
           {selectedTrip.end_date && ` → ${selectedTrip.end_date}`}
@@ -273,23 +298,41 @@ export function TripPage() {
           )}
         </div>
 
-        <div className="mt-4 flex gap-3">
-          <Button
-            onClick={() => completeTrip(selectedTrip.id)}
-            variant="outline"
-            className="flex-1 rounded-xl border-[#E5E5EA] text-sm"
-          >
-            标记完成
-          </Button>
-          <Button
-            onClick={() => deleteTrip(selectedTrip.id)}
-            variant="outline"
-            className="rounded-xl border-[#FF3B30] text-sm text-[#FF3B30] hover:bg-[#FF3B30]/10"
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
-        </div>
-
+        {isEditingTrip && (
+          <div className="mt-3 flex gap-3">
+            <Button
+              onClick={saveTripDetail}
+              className="flex-1 rounded-xl bg-[#1D1D1F] text-white hover:bg-black text-sm"
+            >
+              保存
+            </Button>
+            <Button
+              onClick={cancelEditTripDetail}
+              variant="outline"
+              className="flex-1 rounded-xl border-[#E5E5EA] text-sm"
+            >
+              取消
+            </Button>
+          </div>
+        )}
+        {!isEditingTrip && (
+          <div className="mt-4 flex gap-3">
+            <Button
+              onClick={() => completeTrip(selectedTrip.id)}
+              variant="outline"
+              className="flex-1 rounded-xl border-[#E5E5EA] text-sm"
+            >
+              标记完成
+            </Button>
+            <Button
+              onClick={() => deleteTrip(selectedTrip.id)}
+              variant="outline"
+              className="rounded-xl border-[#FF3B30] text-sm text-[#FF3B30] hover:bg-[#FF3B30]/10"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        ) }
         <div className="h-8" />
       </div>
     );
@@ -415,3 +458,17 @@ function PlaneIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
