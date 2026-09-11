@@ -42,6 +42,9 @@ export function TripPage() {
   const [editingTrip, setEditingTrip] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [editDestination, setEditDestination] = useState('');
+  const [isEditingTrip, setIsEditingTrip] = useState(false);
+  const [editTripName, setEditTripName] = useState('');
+  const [editTripDestination, setEditTripDestination] = useState('');
 
   // Initialize date on client only
   useEffect(() => {
@@ -167,6 +170,35 @@ export function TripPage() {
         setSelectedTrip(null);
         setTimeout(() => fetchTripRecords(tripId), 100);
       }
+    } else {
+      toast.error('保存失败');
+    }
+  };
+
+  const startEditTripDetail = () => {
+    setIsEditingTrip(true);
+    setEditTripName(selectedTrip?.name || '');
+    setEditTripDestination(selectedTrip?.destination || '');
+  };
+
+  const cancelEditTripDetail = () => {
+    setIsEditingTrip(false);
+  };
+
+  const saveTripDetail = async () => {
+    if (!supabase || !editTripName.trim() || !selectedTrip) {
+      if (!editTripName.trim()) toast.error('名称不能为空');
+      return;
+    }
+    const { error } = await supabase
+      .from('trips')
+      .update({ name: editTripName.trim(), destination: editTripDestination.trim() || null })
+      .eq('id', selectedTrip.id);
+    if (!error) {
+      toast.success('已保存');
+      setIsEditingTrip(false);
+      setSelectedTrip({ ...selectedTrip, name: editTripName.trim(), destination: editTripDestination.trim() || null });
+      fetchTrips();
     } else {
       toast.error('保存失败');
     }
