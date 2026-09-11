@@ -254,6 +254,7 @@ export function TripPage() {
             {selectedTrip.destination}
           </div>
         )}
+        <div className="mb-5 flex items-center gap-1 text-sm text-[#86868B]">
           <Calendar className="h-3.5 w-3.5" />
           {selectedTrip.start_date}
           {selectedTrip.end_date && ` → ${selectedTrip.end_date}`}
@@ -458,6 +459,7 @@ function PlaneIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 
 
 
